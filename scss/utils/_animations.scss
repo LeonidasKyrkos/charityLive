@@ -1,0 +1,26 @@
+@include keyframes(slide-left) {
+	0% {
+		@include transform(translateX(0)scale(1));
+	}
+	100% {
+		@include transform(translateX(em(-5))scale(0.6));
+	}
+}
+
+@include keyframes(slide-right) {
+	0% {
+		@include transform(translateX(0)scale(1));
+	}
+	100% {
+		@include transform(translateX(em(5))scale(0.6));
+	}
+}
+
+@include keyframes(grow) {
+	0% {
+		@include transform(scale(1)translateY(0));
+	}
+	100% {
+		@include transform(scale(1.3)translateY(em(-15)));
+	}
+}

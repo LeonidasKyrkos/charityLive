@@ -66,7 +66,7 @@ $module: 		'header';
 
 .#{$module} {
 	background-color: darken($secondaryGray,5%);
-	padding: em(30) em(30) 0;
+	padding: 0 em(30);
 	position: relative;
 	z-index: 2;
 
@@ -81,7 +81,6 @@ $module: 		'header';
 	h2 {
 		text-decoration: underline;
 		font-style: italic;
-		padding-top: em(10,20);
 		padding-bottom: em(40,20);
 		font-size: em(20);
 		font-family: $headingFontFamily;
@@ -89,30 +88,137 @@ $module: 		'header';
 	
 }
 
+// animation //
+
+$module: 		'animation';
+.#{$module} {
+	text-align: center;
+	margin-bottom: em(10);
+	display: block;
+	border: 0;
+	text-decoration: none;
+	outline: none;
+	box-shadow: none;
+
+	&__person {
+		display: inline-block;
+		margin: em(5);
+		vertical-align: bottom;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+
+		&--m {
+			width: em(55);
+			height: em(145);
+			background-image: url(/img/animation/man.png);
+			@extend .#{$module}__person;
+			@include animation(slide-left 4s 1s forwards ease-in);
+		}
+
+		&--f {
+			width: em(68);
+			height: em(144);
+			background-image: url(/img/animation/woman.png);
+			@extend .#{$module}__person;
+			@include animation(slide-right 4s 1s forwards ease-in);
+		}
+
+		&--child-m {
+			width: em(36);
+			height: em(68);
+			background-image: url(/img/animation/boy.png);
+			@extend .#{$module}__person;
+			@include animation(grow 4s 1s forwards ease-in);
+		}
+
+		&--child-f {
+			width: em(44);
+			height: em(71);
+			background-image: url(/img/animation/girl.png);
+			@extend .#{$module}__person;
+			@include animation(grow 4s 1s forwards ease-in);
+		}
+	}
+}
+
+// pancake and nav //
+
+$module: 		'pancake';
+
+.#{$module} {
+	position: fixed;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	z-index: 3;
+	padding: em(10);
+	background-color: $secondaryBlue;
+
+	&__defaults {
+		height: em(3);
+		background-color: $white;
+		width: em(30);
+		margin-top: em(5);
+	}
+
+	&__top {
+		@extend .#{$module}__defaults;
+		margin-top: 0;
+	}
+
+	&__mid {
+		@extend .#{$module}__defaults;
+	}
+
+	&__bot {
+		@extend .#{$module}__defaults;
+	}
+}
+
 $module: 		'topnav';
 
 .#{$module} {
+	position: fixed;
+	z-index: 1;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	height: 0;
+	width: 0;
+	overflow: hidden;
+	background-color: rgba($black,0.8);
+	@include transition(opacity 0.15s linear);
+
+	.menu & {
+		opacity: 1;
+		z-index: 1;
+		height: 100%;
+		width: 100%;
+	}
 	&__items {
-		text-align: center;
+		position: absolute;
+		left: 0;
+		width: 100%;
+		top: 50%;
+		@include transform(translateY(-50%));
 	}
 	&__item {
-		display: inline-block;
-		vertical-align: bottom;
+		display: block;
 	}
 	&__link {
 		text-decoration: none;
 		font-style: normal;
-		background-color: $secondaryBlue;
 		color: $white;
+		text-align: center;
 		display: block;
-		width: em(100,14);
-		margin: 0 1px;
-		font-size: em(14);
+		margin: 0;
+		font-size: em(48);
 		text-transform: lowercase;
 		font-weight: 400;
 
 		&:hover {
-			background-color: darken($secondaryBlue,5%);
+			background-color: rgba(darken($secondaryBlue,5%),0.4);
 		}
 	}
 }
@@ -249,11 +355,23 @@ $module: 		'form';
 				padding-left: 0;
 				position: relative;
 				z-index: 2;
+
+				@media(max-width: 900px) {
+					float: none;
+					width: auto;
+					margin: 0 auto;
+				}
 			}
 
 			float: right;
 			width: 100%;
 			padding-left: em(310);
+
+			@media(max-width: 900px) {
+				float: none;
+				width: auto;
+				padding: 0;
+			}
 
 			>li {
 				margin-bottom: em(5);
@@ -268,10 +386,18 @@ $module: 		'form';
 			display: block;
 			float: left;
 			width: em(100);
+
+			@media(max-width: 900px) {
+				margin-right: em(-100);
+			}
 		}
 
-		.required {
-
+		.flex {
+			@media(max-width: 900px) {
+				display: block;
+				width: auto;
+				margin-left: em(100);
+			}
 		}
 
 		input {
@@ -279,6 +405,10 @@ $module: 		'form';
 			outline: none !important;
 			border: 1px solid lightGray;
 			padding: em(3) em(5);
+
+			@media(max-width: 900px) {
+				width: 100%;
+			}
 		}
 	}
 
