@@ -1,0 +1,15 @@
+@import 'bourbon';
+@import 'utils/reset';
+@import 'default';
+@import 'utils/mixins';
+@import 'utils/variables';
+
+body{
+	font-family: $baseFontFamily;
+	line-height: ($baseLineHeight/$baseFontSize);
+	font-weight: $baseFontWeight;
+	-webkit-font-smoothing: antialiased;
+	color: $black;
+	background-color: $white;
+	@include font-size($baseFontSize);
+}
