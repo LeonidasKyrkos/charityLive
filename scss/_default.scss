@@ -39,10 +39,27 @@ p {
 
 // section colours //
 
+section {
+	&:last-of-type {
+		&:after {
+			content: none;
+		}
+	}
+}
+
 .sectionDefaults {
 	min-height: em(360);
 	padding: em(30) 0;
-	border-bottom: 1px solid lightgray;
+
+	&:after {
+		content: "";
+		width: 100%;
+		display: block;
+		height: 10px;
+		margin: 0 auto;
+		@include linear-gradient(to right,transparent 0%,rgba($secondaryBlue,0.1) 10%,rgba($secondaryBlue,0.1) 90%,transparent 100%);
+		margin-top: em(60);
+	}
 }
 
 .dark {
@@ -180,7 +197,7 @@ $module: 		'topnav';
 
 .#{$module} {
 	position: fixed;
-	z-index: 1;
+	z-index: 2;
 	opacity: 0;
 	top: 0;
 	left: 0;
@@ -354,7 +371,6 @@ $module: 		'form';
 				width: em(300);
 				padding-left: 0;
 				position: relative;
-				z-index: 2;
 
 				@media(max-width: 900px) {
 					float: none;
